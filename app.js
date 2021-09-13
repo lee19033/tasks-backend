@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const HttpError = require('./models/http-error');
+const path = require('path'); 
+const fs = require('fs');
 
 const userRoutes = require('./routes/user-routes');
 const usersRoutes = require('./routes/users-routes');
@@ -26,6 +28,8 @@ app.use( (req, res, next)  => {
 
 app.use(express.json());
 
+app.use('/uploads/images', express.static(path.join('uploads','images')));
+
 
 //app.use('/api/users', userRoutes);
 app.use('/api/users', usersRoutes);
@@ -37,7 +41,15 @@ app.use((req, res, next) => {
     throw error;
 });
 
-app.use((error, req, res, next) => {''
+app.use((error, req, res, next) => {
+
+    //check
+    /*if (req.file) {
+        fs.unlink(req.file.path, err => {
+            console.log(err);
+        });
+    }*/
+
     if(res.headerSent) {
         return next(error);
     }

@@ -114,7 +114,7 @@ const updateTaskById = async (req, res, next) => {
     task.taskDescription = taskDescription;
     task.taskDuedate = taskDuedate;
     task.taskStatus = taskStatus; 
-    //task.taskImage = taskImage; 
+    task.taskImage = taskImage; 
     task.taskMembers = taskMembers; 
 
     try {
